@@ -10,6 +10,7 @@
 
 #include <linux/err.h>
 #include <linux/gpio.h>
+#include <linux/gpio.h>
 #include <linux/interrupt.h>
 #include <linux/jiffies.h>
 #include <linux/mmc/cd-gpio.h>

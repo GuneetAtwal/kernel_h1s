@@ -1162,8 +1162,7 @@ static int mtdchar_mmap(struct file *file, struct vm_area_struct *vma)
 #ifdef CONFIG_MMU
 	struct mtd_file_info *mfi = file->private_data;
 	struct mtd_info *mtd = mfi->mtd;
-	struct map_info *map = mtd->priv;
-	resource_size_t start, off;
+	struct map_info *map = mtd->priv;	resource_size_t start, off;
 	unsigned long len, vma_len;
 
 	if (mtd->type == MTD_RAM || mtd->type == MTD_ROM) {
@@ -1188,16 +1187,16 @@ static int mtdchar_mmap(struct file *file, struct vm_area_struct *vma)
 			return -EINVAL;
 		vma->vm_flags |= VM_IO | VM_RESERVED;
 
+        /* This is broken because it assumes the MTD device is map-based
+	   and that mtd->priv is a valid struct map_info.  It should be
+	   replaced with something that uses the mtd_get_unmapped_area()
+	   operation properly. */
+	if (0 /*mtd->type == MTD_RAM || mtd->type == MTD_ROM*/) {
 #ifdef pgprot_noncached
-		if (file->f_flags & O_DSYNC || off >= __pa(high_memory))
+		if (file->f_flags & O_DSYNC || map->phys >= __pa(high_memory))
 			vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
 #endif
-		if (io_remap_pfn_range(vma, vma->vm_start, off >> PAGE_SHIFT,
-				       vma->vm_end - vma->vm_start,
-				       vma->vm_page_prot))
-			return -EAGAIN;
-
-		return 0;
+		return vm_iomap_memory(vma, map->phys, map->size);
 	}
 	return -ENOSYS;
 #else
