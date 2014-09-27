@@ -395,6 +395,7 @@ obj-$(CONFIG_MSM_HSIC_SYSMON_TEST) += hsic_sysmon_test.o
 obj-$(CONFIG_MSM_RPM_SMD) += rpm-smd.o
 obj-$(CONFIG_MSM_CPR) += msm_cpr.o
 obj-$(CONFIG_MSM_VP_REGULATOR) += msm_vp.o
+obj-$(CONFIG_FORCE_FAST_CHARGE) += fastchg.o
 obj-$(CONFIG_MSM_RPC_PMIC) += pmic.o
 obj-$(CONFIG_MSM_RPC_USB) += rpc_hsusb.o rpc_fsusb.o
 obj-$(CONFIG_MSM_RPC_PMAPP) += rpc_pmapp.o
