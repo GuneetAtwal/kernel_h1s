@@ -49,7 +49,7 @@
 #define GPIO_HAPTIC_EN 50
 #define ISA1000_VIB_DEFAULT_TIMEOUT	15000
 
-static int pwm_duty = 0;
+unsigned long pwm_duty = 40;
 
 /*
 ** PWM to ISA1000
@@ -219,22 +219,19 @@ chip_dwn:
 static ssize_t vibrator_amp_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
-	return sprintf(buf, "%d\n", pwm_duty);
+	return sprintf(buf, "%lu\n", pwm_duty);
 }
 
 static ssize_t vibrator_amp_store(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t size)
 {
-    int gain;
-	sscanf(buf, "%d", &gain);
-
-    if(gain>100)
-        gain=100;
-    else if(gain<80)
-        gain=80;
-
-    pwm_duty = gain;
-
+	if (kstrtoul(buf, 0, &pwm_duty))
+{
+    	if (pwm_duty > 100)
+        	pwm_duty = 100;
+}
+    	else if (pwm_duty < 40)
+        	pwm_duty = 40;
 	return size;
 }
 
