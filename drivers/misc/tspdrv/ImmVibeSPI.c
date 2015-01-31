@@ -49,7 +49,7 @@
 #define GPIO_HAPTIC_EN 50
 #define ISA1000_VIB_DEFAULT_TIMEOUT	15000
 
-unsigned long pwm_duty = 40;
+unsigned long pwm_duty = 1;
 
 /*
 ** PWM to ISA1000
@@ -230,8 +230,8 @@ static ssize_t vibrator_amp_store(struct device *dev,
     	if (pwm_duty > 100)
         	pwm_duty = 100;
 }
-    	else if (pwm_duty < 40)
-        	pwm_duty = 40;
+    	else if (pwm_duty < 1)
+        	pwm_duty = 1;
 	return size;
 }
 
