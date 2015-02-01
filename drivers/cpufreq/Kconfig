@@ -109,40 +109,6 @@ config CPU_FREQ_DEFAULT_GOV_INTERACTIVE
 	  loading your cpufreq low-level hardware driver, using the
 	  'interactive' governor for latency-sensitive workloads.
 
-<<<<<<< HEAD
-=======
-config CPU_FREQ_DEFAULT_GOV_OPTIMAX
-	bool "optimax"
-	select CPU_FREQ_GOV_OPTIMAX
-	select CPU_FREQ_GOV_PERFORMANCE
-	help
-	  Use the CPUFreq governor 'optimax' as default
-
-config CPU_FREQ_DEFAULT_GOV_SMARTMAX
-	bool "smartmax"
-	select CPU_FREQ_GOV_SMARTMAX
-	help
-	  Use the CPUFreq governor 'smartmax' as default
-
-config CPU_FREQ_DEFAULT_GOV_ONDEMANDPLUS
-	bool "ondemandplus"
-	select CPU_FREQ_GOV_ONDEMANDPLUS
-	select CPU_FREQ_GOV_PERFORMANCE
-	help
-	  Use the CPUFreq governor 'ondemandplus' as default. This allows
-	  you to get a full dynamic frequency capable system by simply
-	  loading your cpufreq low-level hardware driver.
-	  Be aware that not all cpufreq drivers support the ondemandplus
-	  governor. If unsure have a look at the help section of the
-	  driver. Fallback governor will be the performance governor.
-
-config CPU_FREQ_DEFAULT_GOV_WHEATLEY
-	bool "wheatley"
-	select CPU_FREQ_GOV_WHEATLEY
-	select CPU_FREQ_GOV_PERFORMANCE
-	help
-	  Use the CPUFreq governor 'wheatley' as default.
-
 config CPU_FREQ_DEFAULT_GOV_INTELLIACTIVE
 	bool "intelliactive"
 	select CPU_FREQ_GOV_INTELLIACTIVE
@@ -160,8 +126,6 @@ config CPU_FREQ_DEFAULT_GOV_INTELLIDEMAND
 	  you to get a full dynamic frequency capable system by simply
 	  loading your cpufreq low-level hardware driver.
 
-
->>>>>>> 512fe22... drivers: cpufreq: Import intellidemand/active
 endchoice
 
 config CPU_FREQ_GOV_PERFORMANCE
